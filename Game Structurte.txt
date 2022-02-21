@@ -7,9 +7,10 @@ Classes:
 	-Color
 
 	Intut reader and writer
--Game
 
--Servidor
+
+-Servidor/Game
+
 	reader to define the methods to play.
 
 
@@ -64,8 +65,15 @@ Classes:
 
 
 -Dices
-	- 2 dices - 1-6
+	- int minNumber
+	- int Max number
+
+	Soma de 2 random numbers entre min e max;
+
+1
+methods:
 		Sum of both dices, and If both dices are the same number roll again. If rolls 3 times in a row, goes to jail.
+		
 
 
 
