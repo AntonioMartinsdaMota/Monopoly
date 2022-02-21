@@ -1,0 +1,107 @@
+
+Classes:
+
+-Player
+	-Wallet
+	-Name
+	-Color
+
+	Intut reader and writer
+-Game
+
+-Servidor
+	reader to define the methods to play.
+
+
+	-Board
+	- wallet - Parking Lot
+	
+	Methods:
+		-Roll dices 
+		-Pay
+		-Buy
+		-Take Mystery Card
+		-Get completed lap money
+		- Pay bail from jail
+		- Move
+
+
+
+-Positions
+	-Houses
+		- Nome da Rua
+		- Buy price
+		- Rent price
+
+
+	-Tax Position
+		- Pay price (The money that is collected here goes to parking lot)
+
+	-Mistery Cards (Plus)
+		- 1 player wins money
+		- all players win money
+		- 1 player pays (The money that is collected here goes to parking lot)
+		- all player pay (The money that is collected here goes to parking lot)
+		- Go to Jail
+
+	-Jail
+		- Keeps player out of game for 3 rounds
+		- Player rolls dices every rount to try to escape.
+		- or player pays the bail
+
+	-Go to Jail (Plus)
+		- Send
+
+	-Free Parking
+		- Gives the player the money that is in the midle. collected from tax cards.
+
+
+
+
+-Board
+	-Array Positions
+		- The index of the array is the position of the card in the board. (40 Positions)
+
+
+-Dices
+	- 2 dices - 1-6
+		Sum of both dices, and If both dices are the same number roll again. If rolls 3 times in a row, goes to jail.
+
+
+
+
+Start of Game:
+
+number of players: 2-4
+
+initial balance of each player: 1500
+All players roll dices, and the hights sum of numbers plays first.
+all players start on the position 0, that is the starting point.
+player can buy or not buy a property.
+If a player has the property cant buy again, or if any player already purchased the property the player cant buy again. 
+In this case must pay to the owner the rent price.
+Every completed lap of the board, player wins money.
+if a player gets in the mistery cards, takes 1 card and gets money or pay or go to jail.
+If a player goes to a tax position must pay the amount and the money goes to the parkinglot wallet.
+if a player stops in the Free parking, gets the amout that is there and the amont goes to 0 again.
+player goes to jail, either from getting mystery jail card, og gets to the jail position or rolls the dice 3 times in a row with same number on both.
+If player goes to the jail:  is out of game for 3 rounds- Player rolls dices every rount to try to escape or player pays the bail.
+players have 30 seconds to play each round, otherwise, next player takes the lead. and pay a tax, and at 3rd is out of the game for idel.
+
+
+
+
+End of game:
+
+
+player loses when balance is 0.
+if a player doesnt have money to play the price of tax or a player's rent, loses the game.
+
+The winner is the last player to survive.
+
+
+
+
+
+
+
