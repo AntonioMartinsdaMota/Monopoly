@@ -1,0 +1,18 @@
+- Create Classes - Game/Servidor, Dices, Positions, Board, Player
+Classes that extend from positions:
+	- houses, Tax, Mystery Cards, Jail, Go to Jail, Free Parking
+
+- Create Server-Client
+Create a input stream reader ou buffer reader e output buffer writer, to communicate with the server, using system in. Socket.
+
+- Game:
+	- Roll dices (Chamar o metodo criado nos dices - Random gen)
+	- Pay
+	- Buy
+	- Take mystery card
+	- Get copleted lap money
+	- pay bail
+	- move
+	
+
+
