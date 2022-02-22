@@ -1,4 +1,4 @@
-package academy.mindwsap;
+package academy.mindswap.other;
 
 public class Dices {
 
