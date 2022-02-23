@@ -2,7 +2,8 @@ Monopoly Game
 
 Monopoly is a text based multi-player game that consists in buying properties an collect rent from their opponents, with the goal being to drive them into bankruptcy.
 
-Authors
+Authors:
+
 -António Mota (https://github.com/AntonioMartinsdaMota)
 
 -Tomás Fonseca (https://github.com/tomasfons8)
@@ -12,6 +13,7 @@ Authors
 -Vanilson Muhongo (https://github.com/edsonwade)
 
 Rules of the game
+
 Number of players: 2-4
 
 - Initial balance of each player is 1500$
