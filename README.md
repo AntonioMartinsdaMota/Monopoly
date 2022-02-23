@@ -26,3 +26,4 @@ Number of players: 2-4
 - A player is eliminated from the game when he balance reaches zero
 - The winner is the last player with money in the game
 
+![Captura de Ecrã (55)](https://user-images.githubusercontent.com/97283928/155375767-baa442df-56e5-4a86-a960-f19cc765a9e1.png)
