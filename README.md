@@ -1,4 +1,5 @@
-Monopoly Game
+![2560px-Monopoly-Logo svg](https://user-images.githubusercontent.com/97283928/155377824-2c55a452-4ea8-4df5-b61e-a7828220ebe9.png)
+
 
 Monopoly is a text based multi-player game that consists in buying properties an collect rent from their opponents, with the goal being to drive them into bankruptcy.
 
