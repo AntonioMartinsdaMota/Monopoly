@@ -6,9 +6,9 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        Game game = new Game(2);
+        Game game = new Game(4);
 
-        game.start();
+        game.run();
 
     }
 }

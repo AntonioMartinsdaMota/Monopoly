@@ -1,10 +1,9 @@
 package academy.mindswap;
 
-import academy.mindswap.client.Client;
+
 import academy.mindswap.positions.Positions;
 
-import java.io.*;
-import java.net.Socket;
+
 import java.util.LinkedList;
 import java.util.List;
 
