@@ -1,4 +1,4 @@
-package academy.mindswap.server;
+package academy.mindswap.messages;
 
 public abstract class Messages {
 

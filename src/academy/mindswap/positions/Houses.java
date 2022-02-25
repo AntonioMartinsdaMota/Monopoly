@@ -1,13 +1,14 @@
 package academy.mindswap.positions;
 
-import academy.mindswap.Player;
+import academy.mindswap.server.Game;
+import academy.mindswap.server.Player;
 
 public class Houses extends Positions {
 
     protected String color;
     protected int buyPrice;
     protected int rentPrice;
-    protected Player owner;
+    protected Game.PlayerHandler owner;
     protected boolean isOwned;
 
 
@@ -24,31 +25,19 @@ public class Houses extends Positions {
         return color;
     }
 
-    public void setColor(String color) {
-        this.color = color;
-    }
-
     public int getBuyPrice() {
         return buyPrice;
-    }
-
-    public void setBuyPrice(int buyPrice) {
-        this.buyPrice = buyPrice;
     }
 
     public int getRentPrice() {
         return rentPrice;
     }
 
-    public void setRentPrice(int rentPrice) {
-        this.rentPrice = rentPrice;
-    }
-
-    public Player getOwner() {
+    public Game.PlayerHandler getOwner() {
         return owner;
     }
 
-    public void setOwner(Player owner) {
+    public void setOwner(Game.PlayerHandler owner) {
         this.owner = owner;
     }
 

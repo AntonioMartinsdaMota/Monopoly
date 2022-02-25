@@ -4,23 +4,54 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4efb372-c6ba-4abd-b856-2b8d4e020959" name="Changes" comment="Deleted file">
+    <list default="true" id="b4efb372-c6ba-4abd-b856-2b8d4e020959" name="Changes" comment="Day 3 update">
+      <change afterPath="$PROJECT_DIR$/src/academy/mindswap/other/ColorCodes.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/academy/mindswap/server/clientLauncher.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/academy/mindswap/server/clientLauncher2.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/House.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Player.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Position.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaxPosition.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Monopoly/academy/mindswap/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly/academy/mindswap/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly/academy/mindswap/Game.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Monopoly/academy/mindswap/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly/academy/mindswap/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Monopoly/academy/mindswap/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly/academy/mindswap/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/academy/mindswap/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/academy/mindswap/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly/academy/mindswap/Player.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly/academy/mindswap/positions/Houses.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly/academy/mindswap/positions/Houses.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly/academy/mindswap/positions/RailRoad.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly/academy/mindswap/positions/RailRoad.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly/academy/mindswap/server/Messages.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly/academy/mindswap/server/Server$ClientConnectionHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly/academy/mindswap/server/Server.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly/academy/mindswap/server/ServerLauncher.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly/academy/mindswap/server/commands/Command.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly/academy/mindswap/server/commands/CommandHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly/academy/mindswap/server/commands/HelpHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly/academy/mindswap/server/commands/ListHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly/academy/mindswap/server/commands/QuitHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly/academy/mindswap/server/commands/ShoutHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly/academy/mindswap/server/commands/WhisperHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/academy/mindswap/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/academy/mindswap/server/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/academy/mindswap/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/academy/mindswap/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/academy/mindswap/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/academy/mindswap/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/academy/mindswap/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/academy/mindswap/server/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/academy/mindswap/positions/Houses.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/academy/mindswap/positions/Houses.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/academy/mindswap/positions/RailRoad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/academy/mindswap/positions/RailRoad.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/academy/mindswap/server/Messages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/academy/mindswap/messages/Messages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/academy/mindswap/server/Server.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/academy/mindswap/server/ServerLauncher.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/academy/mindswap/server/commands/Command.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/academy/mindswap/server/commands/CommandHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/academy/mindswap/server/commands/HelpHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/academy/mindswap/server/commands/ListHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/academy/mindswap/server/commands/QuitHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/academy/mindswap/server/commands/ShoutHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/academy/mindswap/server/commands/WhisperHandler.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -46,13 +77,18 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../.." />
   </component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="academy.mindswap.server" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Player2">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="academy.mindswap.Main" />
+      <option name="MAIN_CLASS_NAME" value="academy.mindswap.server.Main" />
       <module name="Monopoly" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="academy.mindswap.*" />
+          <option name="PATTERN" value="academy.mindswap.server.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -60,6 +96,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="PLayer1" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="academy.mindswap.server.clientLauncher" />
+      <module name="Monopoly" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Player2" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="academy.mindswap.server.clientLauncher2" />
+      <module name="Monopoly" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Player2" />
+      <item itemvalue="Application.PLayer1" />
+      <item itemvalue="Application.Main" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
@@ -75,6 +130,14 @@
       <option name="presentableId" value="Default" />
       <updated>1645461948323</updated>
     </task>
+    <task id="LOCAL-00001" summary="Day 3 update">
+      <created>1645614978115</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1645614978116</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -90,6 +153,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Deleted file" />
-    <option name="LAST_COMMIT_MESSAGE" value="Deleted file" />
+    <MESSAGE value="Day 3 update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Day 3 update" />
   </component>
 </project>
