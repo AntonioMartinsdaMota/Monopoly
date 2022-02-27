@@ -31,4 +31,17 @@ Number of players: 2-4
 - A player is eliminated from the game when he balance reaches zero
 - The winner is the last player with money in the game
 
-![Captura de Ecrã (55)](https://user-images.githubusercontent.com/97283928/155375767-baa442df-56e5-4a86-a960-f19cc765a9e1.png)
+
+![jail](https://user-images.githubusercontent.com/97283928/155903630-89901b1a-bf54-47c3-aa7e-bf780313aa39.png)
+
+
+![2498bdeb70b6a2e2e59fe1e23db9b6b9](https://user-images.githubusercontent.com/97283928/155903631-0516824b-c849-41e4-9f40-ecdea0e827c8.png)
+
+
+![f69fdb3294e40555a411f1dd17377541](https://user-images.githubusercontent.com/97283928/155903632-aa132050-26d1-4f7c-be4d-a3d3b5aa5ac5.png)
+
+
+![5983f09c3cd53257306ee95d2206c68b](https://user-images.githubusercontent.com/97283928/155903634-95faa383-1ac1-4dd7-bdd0-9c0cfa422a3c.png)
+
+
+![62ca1dec6ae0b1b6c57841bd22ff75a7](https://user-images.githubusercontent.com/97283928/155903639-d0796c9f-41dd-4120-8cea-b79dc9c8fa94.png)
