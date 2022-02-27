@@ -12,7 +12,7 @@ public class Dices {
 
     public int getRandomNumber(){
 
-        return (int) (Math. random()*(maxNumber-minNumber)) + minNumber;
+        return (int) ((Math.random() * (maxNumber - minNumber)) + minNumber);
     }
 
 }
