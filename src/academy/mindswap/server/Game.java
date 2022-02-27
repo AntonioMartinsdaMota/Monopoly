@@ -25,7 +25,7 @@ public class Game implements Runnable {
     private boolean canContinue;
     private Dices dice1;
     private Dices dice2;
-    private  boolean isGameOver;
+    private boolean isGameOver;
 
 
     public Game(int numberOfPlayers) throws IOException {
@@ -119,13 +119,16 @@ public class Game implements Runnable {
     private void collectFreeParkingMoney(PlayerHandler playerHandler) {
         playerHandler.balance += gameWallet;
         playerHandler.sendMessage(ColorCodes.GREEN_BOLD + "You earned " + gameWallet + " from free parking" + ColorCodes.RESET);
+        broadcastOthers(playerHandler.name + "earned" + gameWallet + " from free parking", playerHandler);
         playerHandler.sendMessage("");
+        broadcastOthers("", playerHandler);
 
     }
 
     private void collectFromCompletedRound(PlayerHandler playerHandler) {
         playerHandler.balance += 200;
         playerHandler.sendMessage("You completed a Lap");
+        broadcastOthers(playerHandler.name + " completed a Lap and earned 200 $", playerHandler);
         playerHandler.sendMessage("");
         playerHandler.sendMessage(ColorCodes.GREEN_BOLD + "You earned 200 $" + ColorCodes.RESET);
     }
@@ -149,7 +152,8 @@ public class Game implements Runnable {
         playerHandler.sendMessage("");
         playerHandler.sendMessage(ColorCodes.RED_BOLD + "You pay: " + amount + " $ to " + ((Houses) board[playerHandler.position]).getOwner().name + ColorCodes.RESET);
         ((Houses) board[playerHandler.position]).getOwner().sendMessage(ColorCodes.GREEN_BOLD + playerHandler.name + " pay you " + amount + " $" + ColorCodes.RESET);
-        ((Houses) board[playerHandler.position]).getOwner().sendMessage("");
+        broadcastOthers(playerHandler.name + " pay: " + amount + " $ to " + ((Houses) board[playerHandler.position]).getOwner().name, playerHandler);
+        //((Houses) board[playerHandler.position]).getOwner().sendMessage("");
 
         //playerHandler.sendMessage(playerHandler.name + " Balance: " + playerHandler.balance + " $");
     }
@@ -162,6 +166,7 @@ public class Game implements Runnable {
         playerHandler.sendMessage("Oh, No!!!You have to pay!");
         playerHandler.sendMessage("");
         playerHandler.sendMessage(ColorCodes.RED_BOLD + "You pay: " + amount + " $" + ColorCodes.RESET);
+        broadcastOthers(playerHandler.name + " pay " + amount + " $ from a Mystery Card", playerHandler);
 
     }
 
@@ -174,7 +179,7 @@ public class Game implements Runnable {
         playerHandler.sendMessage("You must pay your taxes!!!");
         playerHandler.sendMessage("");
         playerHandler.sendMessage(ColorCodes.RED_BOLD + "You pay: " + amount + " $" + ColorCodes.RESET);
-
+        broadcastOthers(playerHandler.name + " pay " + amount + " $ from a Tax Card", playerHandler);
     }
 
     private void buy(PlayerHandler playerHandler) {
@@ -188,6 +193,9 @@ public class Game implements Runnable {
                     "\"" + board[playerHandler.position].getName() + "\"" + " for " +
                     ((Houses) board[playerHandler.position]).getBuyPrice() + " $");
             playerHandler.sendMessage("");
+            broadcastOthers(playerHandler.name + " bought " +
+                    "\"" + board[playerHandler.position].getName() + "\"" + " for " +
+                    ((Houses) board[playerHandler.position]).getBuyPrice() + " $", playerHandler);
 
             return;
         }
@@ -204,7 +212,8 @@ public class Game implements Runnable {
         playerHandler.sendMessage(" ");
         playerHandler.sendMessage("Yes! It's your lucky day!!");
         playerHandler.sendMessage("");
-        playerHandler.sendMessage(ColorCodes.GREEN_BOLD + "You received: " + amount + ColorCodes.RESET);
+        playerHandler.sendMessage(ColorCodes.GREEN_BOLD + "You received: " + amount + " $" + ColorCodes.RESET);
+        broadcastOthers(playerHandler.name + " received " + amount + " $ from a Mystery Card", playerHandler);
 
     }
 
@@ -245,6 +254,7 @@ public class Game implements Runnable {
             playerHandler.sendMessage("");
 
             playerHandler.sendMessage("You are in Jail");
+            broadcastOthers(playerHandler.name + " is in Jail", playerHandler);
             playerHandler.sendMessage("You can't move for 1 round");
 
         }
@@ -269,25 +279,24 @@ public class Game implements Runnable {
         return false;
     }
 
-    private void gameOver(){
+    private void gameOver() {
 
         System.out.println(ColorCodes.RED + "The Game is Over" + ColorCodes.RESET);
 
-        System.out.println(ColorCodes.GREEN_BOLD + listOfPlayers.get(0).name + ColorCodes.RESET);
+        System.out.println(ColorCodes.GREEN_BOLD + "The winner is: " + listOfPlayers.get(0).name + ColorCodes.RESET);
+        broadcast(ColorCodes.GREEN_BOLD + "The winner is: " + listOfPlayers.get(0).name + ColorCodes.RESET);
 
         broadcast("");
-        broadcast(ColorCodes.RED_BOLD+"Game is over"+ColorCodes.RESET);
+        broadcast(ColorCodes.RED_BOLD + "Game is over" + ColorCodes.RESET);
         broadcast("");
-        broadcast(ColorCodes.GREEN_BOLD + "  __  __                   _    \n" +
+        broadcast(ColorCodes.GREEN_BOLD + " __  __                   _    \n" +
                 " \\ \\/ /__  __ __  _    __(_)__ \n" +
                 "  \\  / _ \\/ // / | |/|/ / / _ \\\n" +
                 "  /_/\\___/\\_,_/  |__,__/_/_//_/" + ColorCodes.RESET);
         isGameOver = true;
 
 
-
     }
-
 
 
     /**
@@ -356,12 +365,12 @@ public class Game implements Runnable {
 
             String a = ColorCodes.PURPLE_BACKGROUND + ColorCodes.BLACK_BOLD + "    MYSTERY CARD    " + ColorCodes.RESET;
             String b = ColorCodes.PURPLE_BACKGROUND + ColorCodes.BLACK_UNDERLINED + "                    " + ColorCodes.RESET;
-            String c = ColorCodes.WHITE_BACKGROUND_BRIGHT + ColorCodes.PURPLE_BOLD + "        ####        " + ColorCodes.RESET;
-            String d = ColorCodes.WHITE_BACKGROUND_BRIGHT + ColorCodes.PURPLE_BOLD + "       ##  ##       " + ColorCodes.RESET;
-            String e = ColorCodes.WHITE_BACKGROUND_BRIGHT + ColorCodes.PURPLE_BOLD + "          ##        " + ColorCodes.RESET;
-            String f = ColorCodes.WHITE_BACKGROUND_BRIGHT + ColorCodes.PURPLE_BOLD + "         ##         " + ColorCodes.RESET;
-            String g = ColorCodes.WHITE_BACKGROUND_BRIGHT + ColorCodes.PURPLE_BOLD + "                    " + ColorCodes.RESET;
-            String h = ColorCodes.WHITE_BACKGROUND_BRIGHT + ColorCodes.PURPLE_BOLD + "         ##         " + ColorCodes.RESET;
+            String c = ColorCodes.WHITE_BACKGROUND_BRIGHT + ColorCodes.BLACK_BOLD + "        ####        " + ColorCodes.RESET;
+            String d = ColorCodes.WHITE_BACKGROUND_BRIGHT + ColorCodes.BLACK_BOLD + "       ##  ##       " + ColorCodes.RESET;
+            String e = ColorCodes.WHITE_BACKGROUND_BRIGHT + ColorCodes.BLACK_BOLD + "          ##        " + ColorCodes.RESET;
+            String f = ColorCodes.WHITE_BACKGROUND_BRIGHT + ColorCodes.BLACK_BOLD + "         ##         " + ColorCodes.RESET;
+            String g = ColorCodes.WHITE_BACKGROUND_BRIGHT + ColorCodes.BLACK_BOLD + "                    " + ColorCodes.RESET;
+            String h = ColorCodes.WHITE_BACKGROUND_BRIGHT + ColorCodes.BLACK_BOLD + "         ##         " + ColorCodes.RESET;
             String i = ColorCodes.WHITE_BACKGROUND_BRIGHT + "                    " + ColorCodes.RESET;
 
             playerHandler.sendMessage(a);
@@ -412,6 +421,7 @@ public class Game implements Runnable {
 
             playerHandler.sendMessage("");
             playerHandler.sendMessage("You are visiting Jail...");
+            broadcastOthers(playerHandler.name + "is visiting jail",playerHandler);
             playerHandler.sendMessage("");
             ;
             return;
@@ -463,7 +473,7 @@ public class Game implements Runnable {
         for (int i = 0; i < playerHandler.cardsOwned.size(); i++) {
             ((Houses) playerHandler.cardsOwned.get(i)).setOwned(false);
             playerHandler.cardsOwned.remove(i);
-            System.out.println(playerHandler.name + " left the game");
+            //System.out.println(playerHandler.name + " left the game");
         }
     }
 
@@ -479,23 +489,26 @@ public class Game implements Runnable {
 
         while (!canContinue)
 
-        if (!playerHandler.roundCompleted) {
-            playerHandler.sendMessage(ColorCodes.WHITE_UNDERLINED+"Please Roll the Dices" + ColorCodes.RESET);
-            playerHandler.sendMessage("");
-            playerHandler.sendMessage(ColorCodes.GREEN_BOLD+"R -> roll the dices"+ColorCodes.RESET);
+            if (!playerHandler.roundCompleted) {
+                playerHandler.sendMessage(ColorCodes.WHITE_UNDERLINED + "Please Roll the Dices" + ColorCodes.RESET);
+                playerHandler.sendMessage("");
+                playerHandler.sendMessage(ColorCodes.GREEN_BOLD + "R -> roll the dices" + ColorCodes.RESET);
 
-            try {
-                if ("r".equalsIgnoreCase(playerHandler.in.readLine())) {
-                    canContinue=true;
-                    return rollDices(playerHandler);
-                } else {
-                    playerHandler.sendMessage("");
-                    playerHandler.sendMessage(ColorCodes.PURPLE_BOLD + "Invalid operation" + ColorCodes.RESET);
+
+                try {
+                    if ("r".equalsIgnoreCase(playerHandler.in.readLine())) {
+                        broadcastOthers(playerHandler.name + " rolled the dices", playerHandler);
+                        canContinue = true;
+                        return rollDices(playerHandler);
+                    } else {
+
+                        playerHandler.sendMessage(ColorCodes.PURPLE_BOLD + "Invalid operation" + ColorCodes.RESET);
+                        playerHandler.sendMessage("");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
             }
-        }
         return 0;
     }
 
@@ -603,11 +616,13 @@ public class Game implements Runnable {
             playerHandler.position = newNewPosition;
             collectFromCompletedRound(playerHandler);
             playerHandler.sendMessage("You moved to position: " + newNewPosition);
+            broadcastOthers(playerHandler.name + " moved to position " + newNewPosition, playerHandler);
             playerHandler.sendMessage("");
 
         } else {
             playerHandler.position = newPosition;
             playerHandler.sendMessage("You moved to position: " + newPosition);
+            broadcastOthers(playerHandler.name + " moved to position " + newPosition, playerHandler);
             playerHandler.sendMessage("");
         }
     }
@@ -622,9 +637,9 @@ public class Game implements Runnable {
                 boolean validChoice = false;
                 while (!validChoice) {
                     playerHandler.sendMessage("");
-                    playerHandler.sendMessage(ColorCodes.WHITE_UNDERLINED+"Do you want to buy the house?"+ColorCodes.RESET);
-                    playerHandler.sendMessage(ColorCodes.GREEN_BOLD+"Y -> YES" + ColorCodes.RESET + " | " +
-                            ColorCodes.RED_BOLD +  "N -> NO" + ColorCodes.RESET);
+                    playerHandler.sendMessage(ColorCodes.WHITE_UNDERLINED + "Do you want to buy the house?" + ColorCodes.RESET);
+                    playerHandler.sendMessage(ColorCodes.GREEN_BOLD + "Y -> YES" + ColorCodes.RESET + " | " +
+                            ColorCodes.RED_BOLD + "N -> NO" + ColorCodes.RESET);
 
                     String input = null;
                     try {
@@ -635,12 +650,16 @@ public class Game implements Runnable {
 
                     switch (input.toLowerCase()) {
                         case "y" -> {
+                            playerHandler.sendMessage("");
                             buy(playerHandler);
                             validChoice = true;
                         }
-                        case "n" -> validChoice = true;
+                        case "n" -> {
+                            validChoice = true;
+                            broadcastOthers(playerHandler.name + " didn't buy the property", playerHandler);
 
 //no-op
+                        }
                         default -> playerHandler.sendMessage(ColorCodes.PURPLE_BOLD + "Invalid operation" + ColorCodes.RESET + "\n");
 
                         //TODO error handling; maybe repeat question
@@ -665,7 +684,8 @@ public class Game implements Runnable {
             playerHandler.isDead = true;
             resetProperties(playerHandler);
             playerHandler.sendMessage(ColorCodes.WHITE_BOLD_BRIGHT + "You lost\n" + ColorCodes.RESET);
-            broadcast(ColorCodes.WHITE_BOLD_BRIGHT + playerHandler.name + " Left the game" + ColorCodes.RESET);
+            playerHandler.sendMessage("\nYou left the game");
+            broadcastOthers(ColorCodes.WHITE_BOLD_BRIGHT + playerHandler.name + " Left the game" + ColorCodes.RESET, playerHandler);
         }
         if (board[playerHandler.position] instanceof Tax) {
             if (checkIfHasBalanceTax(playerHandler)) {
@@ -676,7 +696,8 @@ public class Game implements Runnable {
             playerHandler.isDead = true;
             resetProperties(playerHandler);
             playerHandler.sendMessage(ColorCodes.WHITE_BOLD_BRIGHT + "You lost\n" + ColorCodes.RESET);
-            broadcast(ColorCodes.WHITE_BOLD_BRIGHT + playerHandler.name + " Left the game" + ColorCodes.RESET);
+            playerHandler.sendMessage("\nYou left the game");
+            broadcastOthers(ColorCodes.WHITE_BOLD_BRIGHT + playerHandler.name + " Left the game" + ColorCodes.RESET, playerHandler);
             return;
         }
 
@@ -689,9 +710,9 @@ public class Game implements Runnable {
                     }
                     playerHandler.sendMessage(ColorCodes.WHITE_BOLD_BRIGHT + "You don't have money to pay" + ColorCodes.RESET);
                     playerHandler.isDead = true;
-                    resetProperties(playerHandler);
                     playerHandler.sendMessage(ColorCodes.WHITE_BOLD_BRIGHT + "You lost\n" + ColorCodes.RESET);
-                    broadcast(ColorCodes.WHITE_BOLD_BRIGHT + playerHandler.name + " Left the game" + ColorCodes.RESET);
+                    playerHandler.sendMessage("\nYou left the game");
+                    broadcastOthers(ColorCodes.WHITE_BOLD_BRIGHT + playerHandler.name + " Left the game" + ColorCodes.RESET, playerHandler);
                 }
                 case "Collect" -> receiveMystery(playerHandler);
 
@@ -708,57 +729,59 @@ public class Game implements Runnable {
         isRoundOver = false;
         canContinue = false;
 
-            while (!canContinue) {
-                playerHandler.sendMessage(ColorCodes.WHITE_UNDERLINED+"What Will Be Your Next Move?" + ColorCodes.RESET);
-                playerHandler.sendMessage(" ");
-                playerHandler.sendMessage(ColorCodes.YELLOW_BOLD+"V -> VIEW PROPERTIES" + " | " + ColorCodes.PURPLE_BOLD +
-                        "B -> CHECK BALANCE " + ColorCodes.RESET);
-                playerHandler.sendMessage(ColorCodes.GREEN_BOLD+"C -> CONTINUE PLAYING" + ColorCodes.RESET + " | " +
-                        ColorCodes.RED_BOLD +  "E -> EXIT GAME" + ColorCodes.RESET);
+        while (!canContinue) {
+            playerHandler.sendMessage(ColorCodes.WHITE_UNDERLINED + "What Will Be Your Next Move?" + ColorCodes.RESET);
+            playerHandler.sendMessage(" ");
+            playerHandler.sendMessage(ColorCodes.YELLOW_BOLD + "V -> VIEW PROPERTIES" + " | " + ColorCodes.CYAN_BOLD +
+                    "B -> CHECK BALANCE " + ColorCodes.RESET);
+            playerHandler.sendMessage(ColorCodes.GREEN_BOLD + "C -> CONTINUE PLAYING" + ColorCodes.RESET + " | " +
+                    ColorCodes.RED_BOLD + "E -> EXIT GAME" + ColorCodes.RESET);
 
-                String input = playerHandler.in.readLine();
+            String input = playerHandler.in.readLine();
 
-                switch (input.toLowerCase()) {
-                    case "b" -> {
-                        playerHandler.sendMessage("");
-                        playerHandler.sendMessage(ColorCodes.GREEN_UNDERLINED + "Your balance is: " + playerHandler.balance + " $" + ColorCodes.RESET);
-                        playerHandler.sendMessage("");
-                    }
-                    case "v" -> {
-                        playerHandler.sendMessage("");
-                        playerHandler.sendMessage("You own the following properties:");
+            switch (input.toLowerCase()) {
+                case "b" -> {
+                    playerHandler.sendMessage("");
+                    playerHandler.sendMessage(ColorCodes.WHITE_BOLD_BRIGHT + "Your balance is: " + playerHandler.balance + " $" + ColorCodes.RESET);
+                    playerHandler.sendMessage("");
+                }
+                case "v" -> {
+                    playerHandler.sendMessage("");
+                    playerHandler.sendMessage(ColorCodes.WHITE_BOLD_BRIGHT + "You own the following properties:" + ColorCodes.RESET);
+                    playerHandler.sendMessage("");
 
-                        if (!playerHandler.cardsOwned.isEmpty()) {
-                            for (Positions p : playerHandler.cardsOwned) {
-                                playerHandler.sendMessage(p.getName());
-                            }
+                    if (!playerHandler.cardsOwned.isEmpty()) {
+                        for (Positions p : playerHandler.cardsOwned) {
+                            playerHandler.sendMessage((playerHandler.cardsOwned.indexOf(p) + 1) + "-> " + p.getName());
                         }
-                        playerHandler.sendMessage("");
                     }
-                    case "c" -> {
-                        playerHandler.sendMessage("");
-                        canContinue = true;
-                    }
-                    case "e" -> {
-                        playerHandler.sendMessage("");
-                        playerHandler.isDead = true;
-                        resetProperties(playerHandler);
-                        playerHandler.sendMessage(ColorCodes.WHITE_BOLD_BRIGHT + "You lost\n" + ColorCodes.RESET);
-                        broadcast(ColorCodes.WHITE_BOLD_BRIGHT + playerHandler.name + " Left the game" + ColorCodes.RESET);
-                        canContinue = true;
-                        isRoundOver = true;
-                        return;
-                    }
-
-//no-op
-                    default -> {
-                        playerHandler.sendMessage("Invalid operation");
-                        playerHandler.sendMessage("");
-                    }
+                    playerHandler.sendMessage("");
+                }
+                case "c" -> {
+                    playerHandler.sendMessage("");
+                    canContinue = true;
+                }
+                case "e" -> {
+                    playerHandler.sendMessage("");
+                    playerHandler.isDead = true;
+                    resetProperties(playerHandler);
+                    playerHandler.sendMessage(ColorCodes.WHITE_BOLD_BRIGHT + "You lost\n" + ColorCodes.RESET);
+                    playerHandler.sendMessage("You left the game");
+                    broadcastOthers(ColorCodes.WHITE_BOLD_BRIGHT + playerHandler.name + " Left the game" + ColorCodes.RESET, playerHandler);
+                    canContinue = true;
+                    isRoundOver = true;
+                    return;
                 }
 
+//no-op
+                default -> {
+                    playerHandler.sendMessage("Invalid operation");
+                    playerHandler.sendMessage("");
+                }
             }
+
         }
+    }
 
 
     /**
@@ -768,10 +791,11 @@ public class Game implements Runnable {
     public void roundMaker(PlayerHandler playerHandler) throws IOException {
 
         if (!isGameOver) {
-            playerHandler.sendMessage("● " + ColorCodes.GREEN_BOLD + playerHandler.name +ColorCodes.RESET + " is your turn");
-            playerHandler.sendMessage("");
+            //playerHandler.sendMessage("");
+            playerHandler.sendMessage("● " + ColorCodes.GREEN_BOLD + playerHandler.name + ColorCodes.RESET + " is your turn");
             playerHandler.sendMessage("");
             System.out.println(ColorCodes.GREEN_BOLD + playerHandler.name + " is playing..." + ColorCodes.RESET);
+            broadcastOthers(ColorCodes.GREEN_BOLD + playerHandler.name + " is playing..." + ColorCodes.RESET, playerHandler);
 
 
             otherEvent(playerHandler);
@@ -791,37 +815,42 @@ public class Game implements Runnable {
                         event(playerHandler);
 
                         playerHandler.sendMessage("Your turn is over!");
-                        playerHandler.sendMessage("");
                         playerHandler.sendMessage("-------------------");
                         playerHandler.sendMessage("");
 
 
                         System.out.println(ColorCodes.RED_BOLD + playerHandler.name + " finished his turn" + ColorCodes.RESET);
                         System.out.println("");
+                        broadcastOthers(ColorCodes.RED_BOLD + playerHandler.name + " finished his turn" + ColorCodes.RESET, playerHandler);
+                        broadcastOthers("", playerHandler);
+
+                        ;
                         isRoundOver = true;
 
 
                     } else {
                         playerHandler.sendMessage(ColorCodes.BLUE_BOLD + "You cant play this round because you were arrested. Next round you can play" + ColorCodes.RESET);
+                        broadcastOthers(ColorCodes.BLUE_BOLD + playerHandler.name + " cant play this round because was arrested. " +
+                                "Next round can play" + ColorCodes.RESET,playerHandler);
                         playerHandler.sendMessage("");
                         playerHandler.isInJail = false;
                         playerHandler.sendMessage("Your turn is over!");
-                        playerHandler.sendMessage("");
                         playerHandler.sendMessage("-------------------");
                         playerHandler.sendMessage("");
-                        for (PlayerHandler ph : listOfPlayers) {
-                            if (ph != playerHandler) {
-                                ph.sendMessage(playerHandler.name + " finished his turn");
-                                ph.sendMessage("");
-                                isRoundOver = true;
+                        System.out.println(ColorCodes.RED_BOLD + playerHandler.name + " finished his turn" + ColorCodes.RESET);
+                        System.out.println("");
+                        broadcastOthers("", playerHandler);
+                        broadcastOthers(ColorCodes.RED_BOLD + playerHandler.name + " finished his turn" + ColorCodes.RESET, playerHandler);
 
-                            }
-                        }
+                        isRoundOver = true;
+
                     }
                 }
             }
         }
     }
+
+
     /**
      * Run
      */
@@ -847,10 +876,10 @@ public class Game implements Runnable {
 
                     if (listOfPlayers.get(i).isDead) {
                         listOfPlayers.get(i).roundCompleted = true;
-                        System.out.println(listOfPlayers.get(i).name + " left the game");
+                       // System.out.println(listOfPlayers.get(i).name + " left the game");
                         listOfPlayers.remove(listOfPlayers.get(i));
                         i--;
-                        if (listOfPlayers.size()==1){
+                        if (listOfPlayers.size() == 1) {
                             gameOver();
                         }
                     }
@@ -874,71 +903,78 @@ public class Game implements Runnable {
         }
     }
 
-    /**
-     * #############################################
-     */
-
-
-    public class PlayerHandler extends Player implements Runnable {
-
-
-        private Socket socket;
-        private BufferedWriter out;
-        private BufferedReader in;
-        private String name;
-        private int balance;
-        private int position;
-        private boolean isInJail;
-        private boolean isDead;
-        private List<Positions> cardsOwned;
-        private boolean roundCompleted;
-        private boolean isPlaying;
-
-
-        public PlayerHandler(Socket socket) throws IOException {
-            this.socket = socket;
-            this.balance = 1500;
-            this.position = 0;
-            this.cardsOwned = new LinkedList<>();
-            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-            this.name = generateName();
-            this.isPlaying = false;
-
-        }
-
-        public String generateName() throws IOException {
-            sendMessage(ColorCodes.RED+ "+-+-+-+-+-+-+-+-+"+ ColorCodes.RESET);
-            sendMessage(ColorCodes.RED + "|M|o|n|o|p|o|l|y|"+ ColorCodes.RESET);
-            sendMessage(ColorCodes.RED + "+-+-+-+-+-+-+-+-+"+ ColorCodes.RESET);
-            sendMessage("");
-
-            sendMessage("WELCOME TO THE GAME!!!");
-
-            sendMessage("");
-            sendMessage(ColorCodes.WHITE_UNDERLINED + "PLEASE WRITE YOUR USERNAME:" + ColorCodes.RESET);
-            String name = in.readLine();
-            return name;
-        }
-
-        private void sendMessage(String message) {
-            try {
-                out.write(message);
-                out.newLine();
-                out.flush();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
-        }
-
-
-        @Override
-        public void run() {
-
+    public void broadcastOthers(String message, PlayerHandler playerHandler) {
+        for (PlayerHandler ph : listOfPlayers) {
+            if (ph != playerHandler)
+                ph.sendMessage(message);
         }
     }
+
+/**
+ * #############################################
+ */
+
+
+public class PlayerHandler extends Player implements Runnable {
+
+
+    private Socket socket;
+    private BufferedWriter out;
+    private BufferedReader in;
+    private String name;
+    private int balance;
+    private int position;
+    private boolean isInJail;
+    private boolean isDead;
+    private List<Positions> cardsOwned;
+    private boolean roundCompleted;
+    private boolean isPlaying;
+
+
+    public PlayerHandler(Socket socket) throws IOException {
+        this.socket = socket;
+        this.balance = 1500;
+        this.position = 0;
+        this.cardsOwned = new LinkedList<>();
+        in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+        this.name = generateName();
+        this.isPlaying = false;
+
+    }
+
+    public String generateName() throws IOException {
+        sendMessage(ColorCodes.RED + "+-+-+-+-+-+-+-+-+" + ColorCodes.RESET);
+        sendMessage(ColorCodes.RED + "|M|o|n|o|p|o|l|y|" + ColorCodes.RESET);
+        sendMessage(ColorCodes.RED + "+-+-+-+-+-+-+-+-+" + ColorCodes.RESET);
+        sendMessage("");
+
+        sendMessage("WELCOME TO THE GAME!!!");
+
+        sendMessage("");
+        sendMessage(ColorCodes.WHITE_UNDERLINED + "PLEASE WRITE YOUR USERNAME:" + ColorCodes.RESET);
+        String name = in.readLine();
+        return name;
+    }
+
+    private void sendMessage(String message) {
+        try {
+            out.write(message);
+            out.newLine();
+            out.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
+    @Override
+    public void run() {
+
+    }
+}
 
 }
 
