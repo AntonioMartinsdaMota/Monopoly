@@ -5,11 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b4efb372-c6ba-4abd-b856-2b8d4e020959" name="Changes" comment="Day 4 update">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Monopoly/academy/mindswap/other/Dices.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly/academy/mindswap/other/Dices.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/academy/mindswap/other/Dices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/academy/mindswap/other/Dices.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/academy/mindswap/server/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/academy/mindswap/server/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/academy/mindswap/server/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/academy/mindswap/server/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,7 +133,14 @@
       <option name="project" value="LOCAL" />
       <updated>1645976217157</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Day 4 update">
+      <created>1645982543684</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1645982543684</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

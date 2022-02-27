@@ -4,7 +4,6 @@ import academy.mindswap.other.ColorCodes;
 import academy.mindswap.other.Dices;
 import academy.mindswap.positions.*;
 
-import javax.swing.plaf.TreeUI;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -23,12 +22,12 @@ public class Game implements Runnable {
     private boolean isRoundOver;
     private final int numberOfPlayers;
     private boolean canContinue;
-    private Dices dice1;
-    private Dices dice2;
+    private final Dices dice1;
+    private final Dices dice2;
     private boolean isGameOver;
 
 
-    public Game(int numberOfPlayers) throws IOException {
+    public Game(int numberOfPlayers){
         this.board = createBoard();
         this.numberOfPlayers = numberOfPlayers;
         this.dice1 = new Dices(1, 6);
@@ -45,7 +44,7 @@ public class Game implements Runnable {
 
     public void startServer() throws IOException {
         this.serverSocket = new ServerSocket(PORT);
-        System.out.println("");
+        System.out.println(" ");
         System.out.println("Server Started. Waiting for players to connect...");
         service = Executors.newCachedThreadPool();
 
@@ -405,7 +404,7 @@ public class Game implements Runnable {
             String g = ColorCodes.WHITE_BACKGROUND_BRIGHT + ColorCodes.BLACK_BOLD + " ||   ||  =  ||   || " + ColorCodes.RESET;
             String h = ColorCodes.WHITE_BACKGROUND_BRIGHT + ColorCodes.BLACK_BOLD + " ||   ||\\__/||    || " + ColorCodes.RESET;
             String i = ColorCodes.WHITE_BACKGROUND_BRIGHT + ColorCodes.BLACK_BOLD + " ||___||) , (||___|| " + ColorCodes.RESET;
-            String j = ColorCodes.WHITE_BACKGROUND_BRIGHT + ColorCodes.BLACK_BOLD + " ||---||-\\_/||---|| " + ColorCodes.RESET;
+
 
 
             playerHandler.sendMessage(a);
@@ -417,13 +416,13 @@ public class Game implements Runnable {
             playerHandler.sendMessage(g);
             playerHandler.sendMessage(h);
             playerHandler.sendMessage(i);
-            ;
+
 
             playerHandler.sendMessage("");
             playerHandler.sendMessage("You are visiting Jail...");
             broadcastOthers(playerHandler.name + "is visiting jail",playerHandler);
             playerHandler.sendMessage("");
-            ;
+
             return;
         }
         if (board[playerHandler.position] instanceof FreeParking) {
@@ -820,11 +819,11 @@ public class Game implements Runnable {
 
 
                         System.out.println(ColorCodes.RED_BOLD + playerHandler.name + " finished his turn" + ColorCodes.RESET);
-                        System.out.println("");
+                        System.out.println(" ");
                         broadcastOthers(ColorCodes.RED_BOLD + playerHandler.name + " finished his turn" + ColorCodes.RESET, playerHandler);
                         broadcastOthers("", playerHandler);
 
-                        ;
+
                         isRoundOver = true;
 
 
@@ -838,7 +837,7 @@ public class Game implements Runnable {
                         playerHandler.sendMessage("-------------------");
                         playerHandler.sendMessage("");
                         System.out.println(ColorCodes.RED_BOLD + playerHandler.name + " finished his turn" + ColorCodes.RESET);
-                        System.out.println("");
+                        System.out.println(" ");
                         broadcastOthers("", playerHandler);
                         broadcastOthers(ColorCodes.RED_BOLD + playerHandler.name + " finished his turn" + ColorCodes.RESET, playerHandler);
 
@@ -858,20 +857,18 @@ public class Game implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("");
+        System.out.println(" ");
         System.out.println("Game started");
         broadcast("");
         broadcast("Game started");
         broadcast("");
-        System.out.println("");
+        System.out.println(" ");
 
         while (!isGameOver) {
             for (int i = 0; i < listOfPlayers.size(); i++) {
 
                 try {
-                    listOfPlayers.get(i).isPlaying = true;
                     listOfPlayers.get(i).roundCompleted = false;
-
                     roundMaker(listOfPlayers.get(i));
 
                     if (listOfPlayers.get(i).isDead) {
@@ -915,7 +912,7 @@ public class Game implements Runnable {
  */
 
 
-public class PlayerHandler extends Player implements Runnable {
+public static class PlayerHandler extends Player implements Runnable {
 
 
     private Socket socket;
@@ -928,7 +925,6 @@ public class PlayerHandler extends Player implements Runnable {
     private boolean isDead;
     private List<Positions> cardsOwned;
     private boolean roundCompleted;
-    private boolean isPlaying;
 
 
     public PlayerHandler(Socket socket) throws IOException {
@@ -939,7 +935,6 @@ public class PlayerHandler extends Player implements Runnable {
         in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
         this.name = generateName();
-        this.isPlaying = false;
 
     }
 
@@ -953,8 +948,7 @@ public class PlayerHandler extends Player implements Runnable {
 
         sendMessage("");
         sendMessage(ColorCodes.WHITE_UNDERLINED + "PLEASE WRITE YOUR USERNAME:" + ColorCodes.RESET);
-        String name = in.readLine();
-        return name;
+        return in.readLine();
     }
 
     private void sendMessage(String message) {
