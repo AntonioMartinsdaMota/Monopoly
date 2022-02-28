@@ -20,7 +20,7 @@ Number of players: 2-4
 - Initial balance of each player is 1500$
 - All players start on the position 0, that is the starting point.
 - A player moves after rolling the dices and the sum of both dices is the number of the position that he has to go .
-- A player has the option to buy a property when he moves to a house or railroad position if this property isnt owned by other player.
+- A player has the option to buy a property when he moves to a house  if this property isnt owned by other player.
 - If a property is already owned the player that gets in that position of the board has to pay the rent to the owner.
 - Every lap completed the player earns 200$ from the game.
 - If a player gets in a mistery card position, takes a random card and can earn money from the game or he has to pay.
