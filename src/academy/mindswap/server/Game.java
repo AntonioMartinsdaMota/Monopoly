@@ -35,7 +35,6 @@ public class Game implements Runnable {
         this.listOfPlayers = new ArrayList<>();
         this.isGameOver = false;
 
-
     }
 
     /**
@@ -118,7 +117,7 @@ public class Game implements Runnable {
     private void collectFreeParkingMoney(PlayerHandler playerHandler) {
         playerHandler.balance += gameWallet;
         playerHandler.sendMessage(ColorCodes.GREEN_BOLD + "You earned " + gameWallet + " from free parking" + ColorCodes.RESET);
-        broadcastOthers(playerHandler.name + "earned" + gameWallet + " from free parking", playerHandler);
+        broadcastOthers(playerHandler.name + " earned" + gameWallet + " from free parking", playerHandler);
         playerHandler.sendMessage("");
         broadcastOthers("", playerHandler);
 
@@ -132,6 +131,16 @@ public class Game implements Runnable {
         playerHandler.sendMessage(ColorCodes.GREEN_BOLD + "You earned 200 $" + ColorCodes.RESET);
     }
 
+    private void receiveMystery(PlayerHandler playerHandler) {
+        int amount = ((Mystery) board[playerHandler.position]).getRentPrice();
+        playerHandler.balance += amount;
+        playerHandler.sendMessage(" ");
+        playerHandler.sendMessage("Yes! It's your lucky day!!");
+        playerHandler.sendMessage("");
+        playerHandler.sendMessage(ColorCodes.GREEN_BOLD + "You received: " + amount + " $" + ColorCodes.RESET);
+        broadcastOthers(playerHandler.name + " received " + amount + " $ from a Mystery Card", playerHandler);
+
+    }
 
     /**
      * Pay Methods
@@ -203,17 +212,6 @@ public class Game implements Runnable {
         playerHandler.sendMessage("");
 
         event(playerHandler);
-    }
-
-    private void receiveMystery(PlayerHandler playerHandler) {
-        int amount = ((Mystery) board[playerHandler.position]).getRentPrice();
-        playerHandler.balance += amount;
-        playerHandler.sendMessage(" ");
-        playerHandler.sendMessage("Yes! It's your lucky day!!");
-        playerHandler.sendMessage("");
-        playerHandler.sendMessage(ColorCodes.GREEN_BOLD + "You received: " + amount + " $" + ColorCodes.RESET);
-        broadcastOthers(playerHandler.name + " received " + amount + " $ from a Mystery Card", playerHandler);
-
     }
 
 
@@ -420,7 +418,7 @@ public class Game implements Runnable {
 
             playerHandler.sendMessage("");
             playerHandler.sendMessage("You are visiting Jail...");
-            broadcastOthers(playerHandler.name + "is visiting jail",playerHandler);
+            broadcastOthers(playerHandler.name + " is visiting jail",playerHandler);
             playerHandler.sendMessage("");
 
             return;
@@ -465,6 +463,7 @@ public class Game implements Runnable {
             playerHandler.sendMessage("");
             playerHandler.sendMessage("You are at Free Parking");
             playerHandler.sendMessage("");
+            collectFreeParkingMoney(playerHandler);
         }
     }
 
@@ -480,7 +479,6 @@ public class Game implements Runnable {
     /**
      * Events
      */
-
 
     public synchronized int rollDicesPlayer(PlayerHandler playerHandler) {
 
@@ -719,7 +717,7 @@ public class Game implements Runnable {
 
             if (playerHandler.position == 20) {
                 getPositionDetails(playerHandler);
-                collectFreeParkingMoney(playerHandler);
+
             }
         }
     }
@@ -848,7 +846,6 @@ public class Game implements Runnable {
             }
         }
     }
-
 
     /**
      * Run
