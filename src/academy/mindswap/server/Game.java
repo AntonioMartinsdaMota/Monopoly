@@ -27,7 +27,7 @@ public class Game implements Runnable {
     private boolean isGameOver;
 
 
-    public Game(int numberOfPlayers){
+    public Game(int numberOfPlayers) {
         this.board = createBoard();
         this.numberOfPlayers = numberOfPlayers;
         this.dice1 = new Dices(1, 6);
@@ -404,7 +404,6 @@ public class Game implements Runnable {
             String i = ColorCodes.WHITE_BACKGROUND_BRIGHT + ColorCodes.BLACK_BOLD + " ||___||) , (||___|| " + ColorCodes.RESET;
 
 
-
             playerHandler.sendMessage(a);
             playerHandler.sendMessage(b);
             playerHandler.sendMessage(c);
@@ -418,7 +417,7 @@ public class Game implements Runnable {
 
             playerHandler.sendMessage("");
             playerHandler.sendMessage("You are visiting Jail...");
-            broadcastOthers(playerHandler.name + " is visiting jail",playerHandler);
+            broadcastOthers(playerHandler.name + " is visiting jail", playerHandler);
             playerHandler.sendMessage("");
 
             return;
@@ -472,6 +471,19 @@ public class Game implements Runnable {
             ((Houses) playerHandler.cardsOwned.get(i)).setOwned(false);
             playerHandler.cardsOwned.remove(i);
             //System.out.println(playerHandler.name + " left the game");
+        }
+    }
+
+    private void listOthersProperties(PlayerHandler playerHandler) {
+        for (PlayerHandler listOfPlayer : listOfPlayers) {
+            if (listOfPlayer != playerHandler) {
+                if (!listOfPlayer.cardsOwned.isEmpty()) {
+                    for (Positions p : listOfPlayer.cardsOwned) {
+                        playerHandler.sendMessage(ColorCodes.WHITE_BOLD_BRIGHT + listOfPlayer.name + " has the following properties:" + ColorCodes.RESET);
+                        playerHandler.sendMessage(((listOfPlayer.cardsOwned.indexOf(p) + 1) + " -> " + p.getName() + "\n"));
+                    }
+                }
+            }
         }
     }
 
@@ -729,10 +741,11 @@ public class Game implements Runnable {
         while (!canContinue) {
             playerHandler.sendMessage(ColorCodes.WHITE_UNDERLINED + "What Will Be Your Next Move?" + ColorCodes.RESET);
             playerHandler.sendMessage(" ");
-            playerHandler.sendMessage(ColorCodes.YELLOW_BOLD + "V -> VIEW PROPERTIES" + " | " + ColorCodes.CYAN_BOLD +
+            playerHandler.sendMessage(ColorCodes.YELLOW_BOLD + "V -> VIEW YOUR PROPERTIES" + " | " + ColorCodes.CYAN_BOLD +
                     "B -> CHECK BALANCE " + ColorCodes.RESET);
             playerHandler.sendMessage(ColorCodes.GREEN_BOLD + "C -> CONTINUE PLAYING" + ColorCodes.RESET + " | " +
-                    ColorCodes.RED_BOLD + "E -> EXIT GAME" + ColorCodes.RESET);
+                    ColorCodes.WHITE_BOLD + "L -> VIEW ALL PLAYER'S PROPERTIES" + ColorCodes.RESET);
+            playerHandler.sendMessage(ColorCodes.RED_BOLD + "E -> EXIT GAME" + ColorCodes.RESET);
 
             String input = playerHandler.in.readLine();
 
@@ -740,6 +753,11 @@ public class Game implements Runnable {
                 case "b" -> {
                     playerHandler.sendMessage("");
                     playerHandler.sendMessage(ColorCodes.WHITE_BOLD_BRIGHT + "Your balance is: " + playerHandler.balance + " $" + ColorCodes.RESET);
+                    playerHandler.sendMessage("");
+                }
+                case "l" -> {
+                    playerHandler.sendMessage("");
+                    listOthersProperties(playerHandler);
                     playerHandler.sendMessage("");
                 }
                 case "v" -> {
@@ -828,7 +846,7 @@ public class Game implements Runnable {
                     } else {
                         playerHandler.sendMessage(ColorCodes.BLUE_BOLD + "You cant play this round because you were arrested. Next round you can play" + ColorCodes.RESET);
                         broadcastOthers(ColorCodes.BLUE_BOLD + playerHandler.name + " cant play this round because was arrested. " +
-                                "Next round can play" + ColorCodes.RESET,playerHandler);
+                                "Next round can play" + ColorCodes.RESET, playerHandler);
                         playerHandler.sendMessage("");
                         playerHandler.isInJail = false;
                         playerHandler.sendMessage("Your turn is over!");
@@ -870,7 +888,7 @@ public class Game implements Runnable {
 
                     if (listOfPlayers.get(i).isDead) {
                         listOfPlayers.get(i).roundCompleted = true;
-                       // System.out.println(listOfPlayers.get(i).name + " left the game");
+                        // System.out.println(listOfPlayers.get(i).name + " left the game");
                         listOfPlayers.remove(listOfPlayers.get(i));
                         i--;
                         if (listOfPlayers.size() == 1) {
@@ -904,68 +922,68 @@ public class Game implements Runnable {
         }
     }
 
-/**
- * #############################################
- */
+    /**
+     * #############################################
+     */
 
 
-public static class PlayerHandler extends Player implements Runnable {
+    public static class PlayerHandler extends Player implements Runnable {
 
 
-    private Socket socket;
-    private BufferedWriter out;
-    private BufferedReader in;
-    private String name;
-    private int balance;
-    private int position;
-    private boolean isInJail;
-    private boolean isDead;
-    private List<Positions> cardsOwned;
-    private boolean roundCompleted;
+        private Socket socket;
+        private BufferedWriter out;
+        private BufferedReader in;
+        private String name;
+        private int balance;
+        private int position;
+        private boolean isInJail;
+        private boolean isDead;
+        private List<Positions> cardsOwned;
+        private boolean roundCompleted;
 
 
-    public PlayerHandler(Socket socket) throws IOException {
-        this.socket = socket;
-        this.balance = 1500;
-        this.position = 0;
-        this.cardsOwned = new LinkedList<>();
-        in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-        this.name = generateName();
+        public PlayerHandler(Socket socket) throws IOException {
+            this.socket = socket;
+            this.balance = 1500;
+            this.position = 0;
+            this.cardsOwned = new LinkedList<>();
+            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+            this.name = generateName();
 
-    }
+        }
 
-    public String generateName() throws IOException {
-        sendMessage(ColorCodes.RED + "+-+-+-+-+-+-+-+-+" + ColorCodes.RESET);
-        sendMessage(ColorCodes.RED + "|M|o|n|o|p|o|l|y|" + ColorCodes.RESET);
-        sendMessage(ColorCodes.RED + "+-+-+-+-+-+-+-+-+" + ColorCodes.RESET);
-        sendMessage("");
+        public String generateName() throws IOException {
+            sendMessage(ColorCodes.RED + "+-+-+-+-+-+-+-+-+" + ColorCodes.RESET);
+            sendMessage(ColorCodes.RED + "|M|o|n|o|p|o|l|y|" + ColorCodes.RESET);
+            sendMessage(ColorCodes.RED + "+-+-+-+-+-+-+-+-+" + ColorCodes.RESET);
+            sendMessage("");
 
-        sendMessage("WELCOME TO THE GAME!!!");
+            sendMessage("WELCOME TO THE GAME!!!");
 
-        sendMessage("");
-        sendMessage(ColorCodes.WHITE_UNDERLINED + "PLEASE WRITE YOUR USERNAME:" + ColorCodes.RESET);
-        return in.readLine();
-    }
+            sendMessage("");
+            sendMessage(ColorCodes.WHITE_UNDERLINED + "PLEASE WRITE YOUR USERNAME:" + ColorCodes.RESET);
+            return in.readLine();
+        }
 
-    private void sendMessage(String message) {
-        try {
-            out.write(message);
-            out.newLine();
-            out.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
+        private void sendMessage(String message) {
+            try {
+                out.write(message);
+                out.newLine();
+                out.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
         }
 
 
+        @Override
+        public void run() {
+
+        }
     }
-
-
-    @Override
-    public void run() {
-
-    }
-}
 
 }
 

@@ -8,7 +8,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        Game game = new Game(2);
+        Game game = new Game(3);
 
         game.startServer();
 
